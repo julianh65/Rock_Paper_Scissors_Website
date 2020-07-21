@@ -1,9 +1,9 @@
 :root{
     --win: #49804D;
     --lose: #A7103A;
-    --background: #b5b5b5;
-    --selection: #E9E5E0;
-    --highlight: #FEFEFC;
+    --background: #bdc0da;
+    --selection: #cedce6;
+    --highlight: #dfe5e8;
 }   
 
 body {
@@ -58,18 +58,20 @@ body {
 }
 
 button {
-    background-color: white;
+    background-color: rgb(237, 240, 244);
     height: 10%;
     margin-left: 20%;
     margin-right: 20%;
     border: none;
     font-size: 18px;
     border-radius: 10px;
+    transition: 0.1s;
+
 }
 
 
 .computerButton{
-    background-color: white;
+    background-color: rgb(237, 240, 244);
     height: 9%;
     margin-left: 20%;
     margin-right: 20%;
@@ -77,6 +79,13 @@ button {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    transition: 0.1s;
+
+}
+
+button:hover{
+    transform: scale(1.05);
+    
 }
 
 
