@@ -1,0 +1,221 @@
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <div id='container'>
+            <div id="topBar">
+                <h1>Rock Paper Scissors</h1>
+            </div>
+            <div id="gameArea">
+                <div id="playarea">
+                    <div class="score" id="playerScore">
+                        Score: 0
+                    </div>
+                    <div id="playerButtons" class="buttons">
+                        <button id='playerRockBtn' value="rock">Rock</button>
+                        <button id='playerPaperBtn' value="paper">Paper</button>
+                        <button id='playerScissorsBtn' value="scissors">Scissors</button>
+                    </div>
+
+                </div>
+                <div id="playarea">
+                    <div class="score" id="computerScore">
+                        Score: 0
+
+                    </div>
+                    <div id="computerButtons" class="buttons">
+                        <div id='computerRockBtn' class='computerButton'>Rock</div>
+                        <div id='computerPaperBtn' class='computerButton'>Paper</div>
+                        <div id='computerScissorsBtn' class='computerButton'>Scissors</div>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div id="resetButtonDiv">
+                <button id="resetButton">Reset</button>
+            </div>
+
+
+
+        </div>
+
+    </body>
+    <script>
+
+        const winningScore = 10;
+
+        let humanScore = 0;
+        let computerScore = 0;
+
+        function computerPlay(){
+            number = Math.random() * 3;
+            number = Math.ceil(number);
+            if(number == 1){
+                return 'rock';
+            }
+            if(number == 2){
+                return 'paper';
+            }
+            if(number == 3){
+                return 'scissors';
+            }
+        }
+
+        //to do: replace with an array get
+        const playerRock = document.querySelector('#playerRockBtn');
+        const playerPaper = document.querySelector('#playerPaperBtn');
+        const playerScissors  = document.querySelector('#playerScissorsBtn');
+
+        const computerRockBtn = document.querySelector('#computerRockBtn');
+        const computerPaperBtn = document.querySelector('#computerPaperBtn');
+        const computerScissorsBtn  = document.querySelector('#computerScissorsBtn');
+
+        playerRock.addEventListener('click', play);
+        playerPaper.addEventListener('click', play);
+        playerScissors.addEventListener('click', play);
+
+
+        const playerScoreDiv = document.querySelector('#playerScore');
+        const computerScoreDiv = document.querySelector('#computerScore');
+        const playerButtonsDiv = document.querySelector("#playerButtons");
+        const computerButtonsDiv = document.querySelector("#computerButtons");
+
+        function updateHumanScore(){
+            playerScoreDiv.textContent = "Score: " + ++humanScore;
+
+            computerButtonsDiv.classList.remove('draw');
+            playerButtonsDiv.classList.remove('draw');
+
+            playerButtonsDiv.classList.add('win');
+            computerButtonsDiv.classList.add('lose');
+            playerButtonsDiv.classList.remove('lose');
+            computerButtonsDiv.classList.remove('win');
+        }
+
+        function updateComputerScore(){
+            computerScoreDiv.textContent = "Score: " + ++computerScore;
+
+            computerButtonsDiv.classList.remove('draw');
+            playerButtonsDiv.classList.remove('draw');
+
+
+            computerButtonsDiv.classList.add('win');
+            playerButtonsDiv.classList.add('lose');
+            computerButtonsDiv.classList.remove('lose');
+            playerButtonsDiv.classList.remove('win');
+        }
+
+        function draw(){
+            computerButtonsDiv.classList.remove('lose');
+            playerButtonsDiv.classList.remove('win');
+            playerButtonsDiv.classList.remove('lose');
+            computerButtonsDiv.classList.remove('win');
+
+            computerButtonsDiv.classList.add('draw');
+            playerButtonsDiv.classList.add('draw');
+
+        }
+
+        const sleep = (milliseconds) => {
+            return new Promise(resolve => setTimeout(resolve, milliseconds))
+        }
+
+        async function play(e){
+
+            playerScissors.classList.remove('selected');
+            playerRock.classList.remove('selected');
+            playerPaper.classList.remove('selected');
+
+            computerScissorsBtn.classList.remove('selected');
+            computerRockBtn.classList.remove('selected');
+            computerPaperBtn.classList.remove('selected');
+
+            let player_input = e.target.value;
+
+            e.target.classList.add('selected');
+
+            let computer_input = computerPlay();
+
+            await sleep(1000);
+
+
+            switch(computer_input){
+                case "rock":
+                    computerRockBtn.classList.add('selected');
+                    break;
+                case "paper": 
+                    computerPaperBtn.classList.add('selected');
+                    break;                
+                case "scissors": 
+                    computerScissorsBtn.classList.add('selected');
+                    break;
+
+            }
+            await sleep(700);
+
+
+            if(player_input == computer_input){
+                draw();
+            }
+            else if(player_input == "scissors" && computer_input == "rock"){
+                updateComputerScore();
+            }            
+            else if(player_input == "scissors" && computer_input == "paper"){
+                updateHumanScore();
+            }            
+            else if(player_input == "paper" && computer_input == "rock"){
+                computerRockBtn.classList.add('selected');
+                updateHumanScore();
+            }           
+             else if(player_input == "paper" && computer_input == "scissors"){
+                computerScissorsBtn.classList.add('selected');
+                updateComputerScore();
+            }            
+            else if(player_input == "rock" && computer_input == "paper"){
+                computerPaperBtn.classList.add('selected');
+                updateComputerScore();
+         
+            }            
+            else if(player_input == "rock" && computer_input == "scissors"){
+                computerScissorsBtn.classList.add('selected');
+                updateHumanScore();
+            }
+
+        }
+
+        const resetButton = document.querySelector("#resetButton");
+        resetButton.addEventListener('click', reset);
+
+
+        function reset(){
+            humanScore = -1;
+            computerScore = -1;
+
+            computerScoreDiv.textContent = "Score: " + ++computerScore;
+            playerScoreDiv.textContent = "Score: " + ++humanScore;
+
+
+
+            computerButtonsDiv.classList.remove('lose');
+            playerButtonsDiv.classList.remove('win');
+            playerButtonsDiv.classList.remove('lose');
+            computerButtonsDiv.classList.remove('win');
+
+            playerScissors.classList.remove('selected');
+            playerRock.classList.remove('selected');
+            playerPaper.classList.remove('selected');
+
+            computerScissorsBtn.classList.remove('selected');
+            computerRockBtn.classList.remove('selected');
+            computerPaperBtn.classList.remove('selected');
+        }
+
+
+
+    </script>
+
+</html>

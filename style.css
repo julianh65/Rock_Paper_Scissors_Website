@@ -1,0 +1,116 @@
+:root{
+    --win: #49804D;
+    --lose: #A7103A;
+    --background: #C7BC94;
+    --selection: #F7F6C4;
+    --highlight: #C3CFA8;
+}   
+
+body {
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    font-family: Helvetica, sans-serif;
+}
+
+#container {
+    display: grid;
+    background-color: var(--background);
+    width: 100%;
+    height: 100%;
+    grid-template-rows:1fr 9fr 1fr;
+}
+
+#topbar {
+    text-align: center;
+
+}
+
+
+
+#gameArea {
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#playarea {
+    background-color: var(--highlight);
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+}
+
+.score {
+    font-size: 20px ;
+
+    margin-right: 20%;
+    margin-left: 8%;
+    margin-top: 5%;
+}
+
+
+#resetButton {
+    width: auto;
+    margin: 10px;
+    height: 60%;
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+button {
+    background-color: white;
+    height: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: none;
+}
+
+
+.computerButton{
+    background-color: white;
+    height: 9%;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.buttons{
+    background-color: var(--selection);
+    margin: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+
+}
+
+#resetbuttonDiv {
+    background-color: var(--background);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+}
+.win{
+    transition: 0.3s;
+    background-color: green;
+}
+
+.lose{
+    transition: 0.3s;
+    background-color: red;
+}
+.draw{
+    transition: 0.3s;
+    background-color: yellow;
+}
+.selected{
+    transition: 0.2s;
+    background-color: #86bfd0b5;
+}
